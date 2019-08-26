@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'windows-2019'
+  name: 'TecConnect50Pool'
 
 steps:
 - script: echo Hello, world!
