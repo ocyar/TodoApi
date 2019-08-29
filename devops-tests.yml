@@ -12,14 +12,8 @@ steps:
 - script: echo Starting Devops Tests!
   displayName: 'Starting Devops Tests'
 
-- task: CmdLine@2
+- task: DotNetCoreCLI@2
   condition: eq(variables.RunTask,'true')
   inputs:
-    script: |
-      echo Running conditional task
-
-
-#- task: DotNetCoreCLI@2
-#  inputs:
-#    command: 'build'
-#    projects: 'TodoApi.csproj'
+    command: 'build'
+    projects: 'TodoApi.csproj'
