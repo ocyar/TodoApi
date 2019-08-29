@@ -12,11 +12,6 @@ steps:
 - script: echo Starting Devops Tests!
   displayName: 'Starting Devops Tests'
 
-- script: echo Build.BuildId = $(Build.BuildId); Build.BuildNumber = $(Build.BuildNumber); Prueba $(BuildNumber)
-  displayName: 'Test predefined variables'
-
-- script: echo Starting Devops Tests!
-  displayName: 'Starting Devops Tests'
 - task: DotNetCoreCLI@2
   displayName: 'Build'
   condition: eq(variables.Build,'true')
