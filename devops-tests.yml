@@ -5,13 +5,6 @@
 
 trigger: none
 
-schedules:
-- cron: "36 11 * * Mon-Fri"
-  displayName: daily build
-  branches:
-    include:
-    - master
-    
 pool:
   name: 'TecConnect50Pool'
 
