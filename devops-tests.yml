@@ -9,7 +9,7 @@ pool:
   name: 'TecConnect50Pool'
 
 steps:
-- script: echo Starting Devops Tests! $(Rev:rrr)
+- script: echo Starting Devops Tests! $(Rev:r)
   displayName: 'Starting Devops Tests'
 
 - task: DotNetCoreCLI@2
