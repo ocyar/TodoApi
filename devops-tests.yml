@@ -6,7 +6,7 @@
 trigger: none
 
 schedules:
-- cron: '54 9 * * Mon-Fri Atlantic/Canary'
+- cron: '0 9 * * Mon-Fri'
   displayName: 'Scheduled build'
   branches:
     include:
