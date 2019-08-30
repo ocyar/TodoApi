@@ -6,12 +6,12 @@
 trigger: none
 
 schedules:
-- cron: '50 9 * * Mon-Fri Atlantic/Canary'
+- cron: '54 9 * * Mon-Fri Atlantic/Canary'
   displayName: 'Scheduled build'
   branches:
     include:
     - master
-  always: 'false'
+  always: 'true'
 
 pool:
   name: 'TecConnect50Pool'
