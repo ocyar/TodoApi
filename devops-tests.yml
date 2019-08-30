@@ -6,11 +6,12 @@
 trigger: none
 
 schedules:
-- cron: '8 9 * * Mon-Fri'
+- cron: '15 9 * * Mon-Fri'
   displayName: 'Scheduled build'
   branches:
     include:
     - master
+  always: 'false'
 
 pool:
   name: 'TecConnect50Pool'
