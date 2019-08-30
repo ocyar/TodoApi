@@ -6,7 +6,7 @@
 trigger: none
 
 schedules:
-- cron: '35 9 * * Mon-Fri'
+- cron: '39 * * * Mon-Fri'
   displayName: 'Scheduled build'
   branches:
     include:
