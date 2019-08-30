@@ -9,7 +9,7 @@ pool:
   name: 'TecConnect50Pool'
 
 variables:
-  Version.MajorMinor: 1.0
+  Version.MajorMinor: 1.1
   Version.Revision: $[counter(variables['Version.MajorMinor'], 0)]
 
 steps:
