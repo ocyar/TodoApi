@@ -8,9 +8,18 @@ trigger: none
 pool:
   name: 'TecConnect50Pool'
 
+variables:
+  Version.MajorMinor: 1.0
+  Version.Revision: $[counter(variables['Version.MajorMinor'], 0)]
+
 steps:
 - script: echo Starting Devops Tests!
   displayName: 'Starting Devops Tests'
+
+- script: |
+    echo Version.MajorMinor = $(Version.MajorMinor)
+    echo Version.Revision = $(Version.Revision)
+  displayName: 'Show Version Variables'
 
 - task: DotNetCoreCLI@2
   displayName: 'Build'
