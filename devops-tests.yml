@@ -14,7 +14,7 @@ steps:
 
 - script: |
     echo SCRIPT1
-    echo END SCRIPT1
+    echito END SCRIPT1
   displayName: 'SCRIPT1'
   condition: eq(variables.Build,'true')
 
