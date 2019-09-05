@@ -12,23 +12,11 @@ steps:
 - script: echo Starting Devops Tests!
   displayName: 'Starting Devops Tests'
 
-- script: |
-    echo SCRIPT1
-    echito END SCRIPT1
-  displayName: 'SCRIPT1'
-  condition: eq(variables.Build,'true')
-
-- script: |
-    echo SCRIPT2
-    echo END SCRIPT2
-  displayName: 'SCRIPT2'
-  condition: and(succeeded(), eq(variables.Build,'true'))
-
-- script: |
-    echo SCRIPT3
-    echo END SCRIPT3
-  displayName: 'SCRIPT3'
-  condition: eq(variables.Build,'true')
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    command: 'install'
+    workingDir: 'wwwroot'
 
 - task: DotNetCoreCLI@2
   displayName: 'Build'
