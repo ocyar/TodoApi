@@ -12,9 +12,27 @@ steps:
 - script: echo Starting Devops Tests!
   displayName: 'Starting Devops Tests'
 
+- script: |
+    echo SCRIPT1
+    echo END SCRIPT1
+  displayName: 'SCRIPT1'
+  condition: eq(variables.Build,'true')
+
+- script: |
+    echo SCRIPT2
+    echo END SCRIPT2
+  displayName: 'SCRIPT2'
+  condition: and(succeeded(), eq(variables.Build,'true'))
+
+- script: |
+    echo SCRIPT3
+    echo END SCRIPT3
+  displayName: 'SCRIPT3'
+  condition: eq(variables.Build,'true')
+
 - task: DotNetCoreCLI@2
   displayName: 'Build'
-  condition: eq(variables.Build,'true')
+  condition: and(succeeded(), eq(variables.Build,'true'))
   inputs:
     command: 'build'
     projects: 'TodoApi.csproj'
