@@ -43,3 +43,25 @@ stages:
       inputs:
         PathtoPublish: '$(build.artifactstagingdirectory)'
       condition: succeededOrFailed()
+
+- stage: Deploy
+  condition: and(succeeded(), eq(variables.StageDeploy,'true'))
+  jobs:
+  - job: Deploy
+    pool:
+      name: 'TecConnect50Pool'
+    steps:
+    - task: DownloadBuildArtifacts@0
+      displayName: 'Download Artifact'
+      inputs:
+        buildType: 'current'
+        artifactName: 'drop'
+        downloadPath: '$(Build.ArtifactStagingDirectory)'
+    - task: AzureRmWebAppDeployment@4
+      displayName: 'Deploy Azure App Service'
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'JMRK Visual Studio Enterprise (8703cd16-c98f-42fc-9060-082e6a201d83)'
+        appType: 'webApp'
+        WebAppName: 'connectodoapi'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
