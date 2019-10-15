@@ -64,4 +64,4 @@ stages:
         azureSubscription: 'JMRK Visual Studio Enterprise (8703cd16-c98f-42fc-9060-082e6a201d83)'
         appType: 'webApp'
         WebAppName: 'connectodoapi'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        packageForLinux: '$(Build.ArtifactStagingDirectory)/drop/s.zip'
