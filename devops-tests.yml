@@ -20,11 +20,13 @@ stages:
         projects: '**/*.csproj'
         feedsToUse: 'select'
     - task: DotNetCoreCLI@2
+      displayName: Build
       inputs:
         command: 'build'
         projects: '**/*.csproj'
         arguments: '--configuration $(BuildConfiguration)'
     - task: DotNetCoreCLI@2
+      displayName: Test
       inputs:
         command: 'test'
         projects: '**/*[Tt]ests/*.csproj'
