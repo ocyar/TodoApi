@@ -1,0 +1,67 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger: none
+
+stages:
+- stage: Build
+  condition: and(succeeded(), eq(variables.StageBuild,'true'))
+  jobs:
+  - job: Build
+    pool:
+      name: 'TecConnect50Pool'
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: Restore
+      inputs:
+        command: 'restore'
+        projects: '**/*.csproj'
+        feedsToUse: 'select'
+    - task: DotNetCoreCLI@2
+      displayName: Build
+      inputs:
+        command: 'build'
+        projects: '**/*.csproj'
+        arguments: '--configuration $(BuildConfiguration)'
+    - task: DotNetCoreCLI@2
+      displayName: Test
+      inputs:
+        command: 'test'
+        projects: '**/*[Tt]ests/*.csproj'
+        arguments: '--configuration $(BuildConfiguration)'
+    - task: DotNetCoreCLI@2
+      displayName: Publish
+      inputs:
+        command: publish
+        publishWebProjects: True
+        arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+        zipAfterPublish: True
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact'
+      inputs:
+        PathtoPublish: '$(build.artifactstagingdirectory)'
+      condition: succeededOrFailed()
+
+- stage: Deploy
+  condition: and(succeeded(), eq(variables.StageDeploy,'true'))
+  jobs:
+  - job: Deploy
+    pool:
+      name: 'TecConnect50Pool'
+    steps:
+    - task: DownloadBuildArtifacts@0
+      displayName: 'Download Artifact'
+      inputs:
+        buildType: 'current'
+        artifactName: 'drop'
+        downloadPath: '$(Build.ArtifactStagingDirectory)'
+    - task: AzureRmWebAppDeployment@4
+      displayName: 'Deploy Azure App Service'
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'JMRK Visual Studio Enterprise (8703cd16-c98f-42fc-9060-082e6a201d83)'
+        appType: 'webApp'
+        WebAppName: 'connectodoapi'
+        packageForLinux: '$(Build.ArtifactStagingDirectory)/drop/s.zip'
