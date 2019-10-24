@@ -65,3 +65,10 @@ stages:
         appType: 'webApp'
         WebAppName: 'connectodoapi'
         packageForLinux: '$(Build.ArtifactStagingDirectory)/drop/s.zip'
+    - task: AzureAppServiceManage@0
+      inputs:
+        azureSubscription: 'JMRK Visual Studio Enterprise (8703cd16-c98f-42fc-9060-082e6a201d83)'
+        Action: 'Install Extensions'
+        WebAppName: 'connectodoapi'
+        ExtensionsList: 'letsencrypt'
+
