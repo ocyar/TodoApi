@@ -1,4 +1,4 @@
-$personalToken = $(ReadSprintNumberToken)
+$personalToken = $env:ReadSprintNumberToken
 $token = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes(":$($personalToken)"))
 $header = @{authorization = "Basic $token"}
 $url = "https://tecalliance.visualstudio.com/TecOrder/TecConnect%205.0/_apis/work/teamsettings"
