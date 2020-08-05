@@ -8,6 +8,5 @@ Write-OutPut "Default Iteration Name: $defaultIterationName"
 $sprintNumber = $defaultIterationName.substring(7)
 Write-OutPut "Sprint Number: $sprintNumber"
 Write-OutPut "BuildVersion before: $env:BuildVersion"
-echo '##vso[task.setvariable variable=BuildVersion]'
-echo $sprintNumber
+"##vso[task.setvariable variable=BuildVersion;]sprintNumber"
 Write-OutPut "BuildVersion after: $env:BuildVersion"
